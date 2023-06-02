@@ -10,7 +10,7 @@ class StoresRepository {
 
     // Fetch data from Firestore
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await FirebaseFirestore.instance.collection('stores').doc('Jw05mBpXnk9ydGaJh0p0').collection('orders').get();
+        await FirebaseFirestore.instance.collection('stores').doc('Jw05mBpXnk9ydGaJh0p0').collection('orders').where("orderStatus", isNotEqualTo: 'delivered').get();
 
     // Process each document in the query snapshot
     querySnapshot.docs.forEach((doc) {
@@ -20,13 +20,50 @@ class StoresRepository {
 
       String user = doc.data()['user'] ?? '';
 
-      bool paymentType = doc.data()['isCancelled'] ?? false;
+      bool paymentType = doc.data()['paymentdone'] ?? false;
+
+      String nameR = doc.data()['nameR']??'';
+      String numberR = doc.data()['numberR']??'';
+      String addressR = doc.data()['addressR']??'';
 
       String weekday = doc.data()['weekday'] ?? '';
       String trackOrder =doc.data()['orderStatus']??'';
-      List<DocumentSnapshotPlatform>list =  doc.data()['lstOfItems']??[];
+      Map<String, dynamic> map = doc.data()['order'] ?? [];
 
-      OrderModel orderModel = OrderModel(time: time, weekday: weekday, date: date, trackOrder: trackOrder, user: user, isCancelled: paymentType, lstOfItems: list);
+      OrderModel orderModel = OrderModel(map: map,time: time, weekday: weekday, date: date, trackOrder: trackOrder, user: user, paymentType: paymentType, addressR: addressR, nameR: nameR, numberR: numberR);
+
+      storesList.add(orderModel);
+    });
+
+    return storesList;
+  }
+
+  static Future<List<OrderModel>> getStoreData2List() async {
+    List<OrderModel> storesList = [];
+
+    // Fetch data from Firestore
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await FirebaseFirestore.instance.collection('stores').doc('Jw05mBpXnk9ydGaJh0p0').collection('orders').where("orderStatus", isEqualTo: 'delivered').get();
+
+    // Process each document in the query snapshot
+    querySnapshot.docs.forEach((doc) {
+      String date = doc.data()['date'] ?? '';
+
+      String time = doc.data()['time'] ?? '';
+
+      String user = doc.data()['user'] ?? '';
+
+      bool paymentType = doc.data()['paymentdone'] ?? false;
+
+      String nameR = doc.data()['nameR']??'';
+      String numberR = doc.data()['numberR']??'';
+      String addressR = doc.data()['addressR']??'';
+
+      String weekday = doc.data()['weekday'] ?? '';
+      String trackOrder =doc.data()['orderStatus']??'';
+      Map<String, dynamic> map = doc.data()['order'] ?? [];
+
+      OrderModel orderModel = OrderModel(map: map,time: time, weekday: weekday, date: date, trackOrder: trackOrder, user: user, paymentType: paymentType, addressR: addressR, nameR: nameR, numberR: numberR);
 
       storesList.add(orderModel);
     });

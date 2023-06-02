@@ -6,8 +6,11 @@ class OrderModel {
   String date;
   String trackOrder;
   String user;
-  bool isCancelled;
-  List<DocumentSnapshotPlatform> lstOfItems;
+  String nameR;
+  String numberR;
+  String addressR;
+  bool paymentType;
+  Map<String, dynamic> map;
 
   OrderModel(
       {required this.time,
@@ -15,6 +18,10 @@ class OrderModel {
       required this.date,
       required this.trackOrder,
       required this.user,
-      required this.isCancelled,
-      required this.lstOfItems});
+      required this.paymentType,
+      required this.nameR,
+      required this.numberR,
+      required this.addressR,
+      required this.map
+      });
 }
