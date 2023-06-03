@@ -10,6 +10,7 @@ class OrderModel {
   String numberR;
   String addressR;
   bool paymentType;
+  String userNumber;
   Map<String, dynamic> map;
 
   OrderModel(
@@ -22,6 +23,7 @@ class OrderModel {
       required this.nameR,
       required this.numberR,
       required this.addressR,
-      required this.map
+      required this.map,
+      required this.userNumber
       });
 }

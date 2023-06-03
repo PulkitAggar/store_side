@@ -5,7 +5,9 @@ import 'package:store_side/screens/profilescreen.dart';
 class DashboardScreen extends StatefulWidget {
   // bool flag;
 
-  DashboardScreen();
+  String storeUid;
+
+  DashboardScreen({required this.storeUid});
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();

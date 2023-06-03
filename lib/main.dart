@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:store_side/screens/DashboardScree.dart';
-import 'package:store_side/screens/landing_screen.dart';
+import 'package:store_side/screens/SigninScreen.dart';
 import 'firebase_options.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(unselectedWidgetColor: Colors.white),
           title: 'Aura',
-          home: DashboardScreen(),
+          home: SignupScreen(),
           // home: (FirebaseAuth.instance.currentUser != null)
           //     ? DashboardScreen()
           //     : const LandingScreen(),
